@@ -51,8 +51,7 @@ def newton_interpolation(points):
 
 
 def generate_regularly(n, interval):
-    h=(interval[1]-interval[0])/n
-    x=[interval[0]+h*i for i in range(n)]
+    x=np.linspace(interval[0],interval[1],n, endpoint=True)
     return x
 
 def generate_czybyszow(n, interval):
@@ -65,11 +64,11 @@ def generate_points(n, interval, x_generator, f_x):
     points=[(x[i],f_x(x[i])) for i in range (n)]
     return points
 
-def draw_points(points, plot_name, file_name):
+def draw_points(points, plot_name, file_name, clean=True):
     x = [point[0] for point in points]
     y = [point[1] for point in points]
-    plt.clf()
-    plt.scatter(x,y)
+    if clean: plt.clf()
+    plt.plot(x,y)
 
     plt.title(plot_name)
     plt.xlabel('x')
@@ -77,6 +76,41 @@ def draw_points(points, plot_name, file_name):
 
     plt.savefig(file_name)
 
-def draw_fun(fun, interval, n, plot_name, file_name):
+def draw_fun(fun, interval, n, plot_name, file_name, clean=True):
     points=generate_points(n, interval, generate_regularly, fun)
-    draw_points(points,plot_name,file_name)
+    draw_points(points,plot_name,file_name, clean)
+
+def draw_interpolation(inter_fun, polynomial, interval, nodes, plot_name, file_name):
+    plt.clf()
+    plt.title(plot_name)
+    plt.xlabel('x')
+    plt.ylabel('y')
+    points = generate_points(1000, interval, generate_regularly, inter_fun)
+    x = [point[0] for point in points]
+    y = [point[1] for point in points]
+    plt.plot(x, y, label="f(x)", color="dodgerblue")
+    points = generate_points(1000, interval, generate_regularly, polynomial)
+    x = [point[0] for point in points]
+    y = [point[1] for point in points]
+    plt.plot(x, y, label="f_inter(x)", color="deeppink")
+    x = [point[0] for point in nodes]
+    y = [point[1] for point in nodes]
+    plt.scatter(x,y, color='darkviolet')
+    plt.savefig(file_name)
+
+
+def max_error(f1, f2, interval):
+    res=0
+    x=generate_regularly(500, interval)
+    for xi in x:
+        res=max(res, abs(f1(xi)-f2(xi)))
+    return res
+
+def mean_squared_error(f1, f2, interval):
+    res=0
+    x = generate_regularly(500, interval)
+    for xi in x:
+        res += (f1(xi)-f2(xi))**2
+    res=res**(1/2)
+    res/=500
+    return res
