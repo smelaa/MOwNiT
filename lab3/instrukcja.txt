@@ -1,0 +1,23 @@
+Instrukcje dot. uruchomienia programu
+
+Program został napisany w języcku Python.
+Aby uruchomić program należy mieć zainstalowany interpreter Pythona 3 oraz wymagane biblioteki i pakiety:
+Numpy, Pandas, dataframe_image, Matplotlib
+Aby pobrać wymagane biblioteki należy zainstalować pip - system do zarządzania pakietami języka Python.
+Aby pobrać wymagany pakiet wystarczy wpisać w konsoli:
+pip install numpy
+pip install pandas
+pip install dataframe_image
+pip install matplotlib
+
+Projekt składa się z plików: test.py (plik wykonywalny) oraz hermite.py i interpolation.py (moduł z wymaganymi funkcjami).
+Oba pliki powinny się znajdować w tym samym katalogu razem z dwoma podkatalogami o nazwach: plots i tables.
+Plik interpolation.py to ten sam plik co w poprzednim zadaniu (zad 2a). Korzystam z zaimplementowanych tam funkcji,
+które rysują wykresy i wyliczają błędy.
+
+Znajdując się w katalogu zawierającym wymagane pliki .py oraz katalogi należy wpisać w konsoli:
+python test.py
+
+Po zakończeniu programu w katalogu plots znajdą się opisane wykresy funkcji interpolowanych oraz ich wielomianów interpolujących.
+W katalogu tables znajdą się opisane tabele z błędami średniokwadratowymi i maksymalnymi. 
+
