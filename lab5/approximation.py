@@ -38,7 +38,7 @@ def generate_points(n, interval, f_x):
     points=[(x[i],f_x(x[i]), 1) for i in range (n)]
     return points
 
-def draw_interpolation(inter_fun, polynomial, interval, nodes, plot_name, file_name):
+def draw_approx(inter_fun, polynomial, interval, nodes, plot_name, file_name):
     plt.clf()
     plt.title(plot_name)
     plt.xlabel('x')
